@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { nanoid } from 'nanoid';
 import Section from '../Section';
 import ContactForm from '../Form';
@@ -45,12 +45,13 @@ export default function App() {
     setFilter(e.target.value);
   };
 
-  const showFiltered = () => {
+  const showFiltered = useMemo(() => {
+    console.log(Date.now());
     const normalizedFilter = filter.toLowerCase();
     return contacts.filter(contact => {
       return contact.name.toLowerCase().includes(normalizedFilter);
     });
-  };
+  }, [contacts, filter]);
 
   return (
     <div className={s.container}>
@@ -61,10 +62,7 @@ export default function App() {
 
       <Section title="Contacts">
         <Filter value={filter} onChange={filterByName} />
-        <ContactList
-          contacts={showFiltered()}
-          onDeleteContact={deleteContact}
-        />
+        <ContactList contacts={showFiltered} onDeleteContact={deleteContact} />
       </Section>
     </div>
   );
