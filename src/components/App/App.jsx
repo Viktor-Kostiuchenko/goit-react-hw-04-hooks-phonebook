@@ -41,12 +41,11 @@ export default function App() {
     );
   };
 
-  const filterByName = e => {
-    setFilter(e.target.value);
+  const filterByName = ({ target: { value } }) => {
+    setFilter(value);
   };
 
   const showFiltered = useMemo(() => {
-    console.log(Date.now());
     const normalizedFilter = filter.toLowerCase();
     return contacts.filter(contact => {
       return contact.name.toLowerCase().includes(normalizedFilter);

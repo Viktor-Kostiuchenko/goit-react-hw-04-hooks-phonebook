@@ -15,7 +15,7 @@ export default function Filter({ value, onChange }) {
           onChange={onChange}
         />
         <span className={s.focusBorder}>
-          <i></i>
+          <i />
         </span>
       </div>
     </label>
